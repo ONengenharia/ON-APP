@@ -187,6 +187,8 @@ canvas.sc{display:block;width:100%;touch-action:none;background:white;cursor:cro
 /* DRIVE STATUS */
 .drive-info{font-size:11px;color:var(--gray);padding:6px 10px;background:var(--bl);border-radius:6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 </style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -871,7 +873,7 @@ async function getGoogleToken(){
   return new Promise((resolve,reject)=>{
     if(!window.google?.accounts?.oauth2){reject(new Error('GIS not loaded'));return}
     const client=window.google.accounts.oauth2.initTokenClient({
-      client_id:'',
+      client_id:'406354945209-954nauejufj5hnfn20gq4uqea9alkndo.apps.googleusercontent.com',
       scope:'https://www.googleapis.com/auth/drive.file',
       callback(resp){
         if(resp.error){reject(new Error(resp.error));return}
@@ -1056,15 +1058,7 @@ async function gerarPDF(i){
 }
 
 // ── INIT ───────────────────────────────────────────────
-// Load GIS script for Drive auth
-const gisScript=document.createElement('script');
-gisScript.src='https://accounts.google.com/gsi/client';
-gisScript.async=true;document.head.appendChild(gisScript);
-
-// Load jsPDF
-const jsPDFScript=document.createElement('script');
-jsPDFScript.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-document.head.appendChild(jsPDFScript);
+// Scripts loaded in head
 
 renderUserList();
 </script>
